@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Cross-Origin_Opener-Policy" content="same-origin-allow-popups">
+    <script src="https://apis.google.com/js/api.js"></script>
+    <title>Proyecto de Backend</title>
+</head>
+<body>
+    <body>
+        <h1>Google-Server</h1>
+
+        <h2>Iniciar Sesión con Google</h2>
+
+        <div id="g_id_onload"
+        data-client_id="163927260381-d7gjkhffreqhq5vnh0v2rl38bunf8fbc.apps.googleusercontent.com"
+        data-context="signin"
+        data-ux_mode="popup"
+        data-login_uri="http://localhost:1000"
+        data-auto_prompt="false"
+        data-callback = handleCredentialResponse>
+    </div>
+
+    <div class="g_id_signin"
+        data-type="standard"
+        data-shape="rectangular"
+        data-theme="outline"
+        data-text="signin_with"
+        data-size="large"
+        data-logo_alignment="left">
+    </div>
+
+    <button id="g_id_signout">Cerrar Sesión</button>
+
+    <script src="https://accounts.google.com/gsi/client" async defer"></script>
+    <script>
+      function handleCredentialResponse(response){
+        console.log("Credential response:", response);
+          const body = {id_token: response.credential};
+          console.log("Sending body:", body);
+          fetch('http://localhost:1000/api/auth/google',{
+            method: 'POST',
+            headers: {
+                'Content-Type' : 'application/json'
+            },
+            body: JSON.stringify(body)
+          })
+          .then(resp => resp.json())
+          .then(resp=>{
+            console.log(resp);
+          })
+          .catch(console.warn)
+
+
+
+      }
+
+      const button = document.getElementById('g_id_signout');
+      button.onclick = async()=>{
+        console.log(google.accounts.id)
+        google.accounts.id.disableAutoSelect()
+        google.accounts.id.revoke(localStorage.getItem('email'),done=>{
+            console.log('consent revoked');
+            localStorage.clear()
+            location.reload()
+        })
+      }
+      
+      </script>
+
+
+</body>
+</html>
+</body>
