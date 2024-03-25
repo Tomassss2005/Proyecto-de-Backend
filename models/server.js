@@ -1,13 +1,14 @@
 const express = require('express');
 const cors = require('cors');
 const {dbConnection} = require("../database/db");
+const { error } = require('console');
 
 class Server{
     constructor(){
 
         this.app = express();
         this.port = process.env.PORT;
-        this.usuariosPath = "/api/usuarios";
+        this.usuariosPath = "/api/clientes";
         this.authPath = "/api/auth";
 
 
@@ -42,8 +43,7 @@ class Server{
     }
 
     routes(){
-        this.app.use(this.usuariosPath, require("../routes/clientes"));
-        this.app.use(this.authPath, require("../routes/clientes"));
+        this.app.use(this.authPath, require('../routes/auth'));
     }
 
     listen(){

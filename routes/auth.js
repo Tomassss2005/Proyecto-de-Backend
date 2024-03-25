@@ -7,11 +7,7 @@ const { SignIn } = require("../controllers/auth");
 
 const {validarDatos} = require("../middlewares/validators");
 
-
-router.post("/google,",[
-    check("id_token", "Se require el id_token").not().isEmpty(),
-    validarDatos,
-], SignIn);
+const {error} = require("../middlewares/error");
 
 
-module.exports = router
+module.exports = router;

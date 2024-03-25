@@ -27,6 +27,18 @@ router.get("/",[
 ], clientesGet);
 
 
+
+const {
+    error,
+}= require("../middlewares/error");
+
+
+
+router.get("/", [
+    check("Ha ocurrido un error"),
+], error);
+
+
 const { iniciarSesion } = require("../controllers/auth");
 
 
