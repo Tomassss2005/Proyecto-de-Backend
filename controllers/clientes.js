@@ -1,5 +1,6 @@
 const Client = require("../models/client");
 const bcryptjs = require('bcryptjs');
+const axios = require("axios");
 
 
 
@@ -81,10 +82,21 @@ const clientesDelete = async (req,res) => {
 };
 
 
+const apiUrl = async (req, res) => {
+    try {
+        const respuesta = await axios.get("https://pokeapi.co/")
+        res.status(200).json({status: respuesta.status,data: respuesta.data})
+    } catch (error) {
+        res.json ({status: error.response.status, data: error.response.data})
+    }
+}
+
+
 
 module.exports = {
     clientesGet,
     clientesPost,
     clientesPut,
     clientesDelete,
+    apiUrl,
 }

@@ -9,6 +9,7 @@ const {
     clientesPost,
     clientesPut,
     clientesDelete,
+    apiUrl,
 } = require("../controllers/clientes");
 
 
@@ -25,6 +26,12 @@ router.get("/",[
     check("contraseña", "La contraseña es obligatoria").not().isEmpty(),
     check("correo", "El correo es obligatorio").isEmail(),
 ], clientesGet);
+
+
+router.get("/",[
+    check("Conectado con éxito"),
+    check("No ha podido conectarse"),
+], apiUrl);
 
 
 

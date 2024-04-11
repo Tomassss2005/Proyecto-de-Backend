@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const {dbConnection} = require("../database/db");
-const { error } = require('console');
+const { error } = require('../middlewares/error');
 
 class Server{
     constructor(){
@@ -40,6 +40,7 @@ class Server{
         this.app.use(express.json());  //Transforma la información de body en json
         this.app.use(cors());
         this.app.use(express.static("public"));
+        this.app.use(error());
     }
 
     routes(){
