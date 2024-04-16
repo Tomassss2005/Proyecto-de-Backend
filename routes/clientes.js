@@ -9,6 +9,7 @@ const {
     clientesPost,
     clientesPut,
     clientesDelete,
+    newError,
     apiUrl,
 } = require("../controllers/clientes");
 
@@ -20,6 +21,8 @@ const {
     validatorJWT,
 }=  require("../middlewares/validators");
 
+const { iniciarSesion } = require("../controllers/auth");
+
 
 
 router.get("/",[
@@ -28,25 +31,15 @@ router.get("/",[
 ], clientesGet);
 
 
-router.get("/",[
+router.get("/pokemons",[
     check("Conectado con éxito"),
     check("No ha podido conectarse"),
 ], apiUrl);
 
 
-
-const {
-    error,
-}= require("../middlewares/error");
-
-
-
-router.get("/", [
-    check("Ha ocurrido un error"),
-], error);
-
-
-const { iniciarSesion } = require("../controllers/auth");
+router.get("/error", [
+    check("Nuevo error, por favor verificar que esté todo correcto")
+], newError)
 
 
 router.post("/",[
@@ -57,6 +50,7 @@ router.post("/",[
     check("correo", "El correo no es válido").isEmail(),
     validarDatos,
 ], clientesPost);
+
 
 
 router.post("/iniciarSesion",[

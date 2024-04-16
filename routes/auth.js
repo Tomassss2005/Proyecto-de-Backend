@@ -7,7 +7,7 @@ const { SignIn } = require("../controllers/auth");
 
 const {validarDatos} = require("../middlewares/validators");
 
-const {error} = require("../middlewares/error");
+const {iniciarSesion} = require("../controllers/auth");
 
 
 module.exports = router;

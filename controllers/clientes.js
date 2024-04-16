@@ -82,14 +82,22 @@ const clientesDelete = async (req,res) => {
 };
 
 
+const newError = async (req,res) => {
+    res.json({
+        msg:"Ha ocurrido un error",
+        newError,
+    });
+};
+
+
 const apiUrl = async (req, res) => {
     try {
         const respuesta = await axios.get("https://pokeapi.co/")
         res.status(200).json({status: respuesta.status,data: respuesta.data})
     } catch (error) {
         res.json ({status: error.response.status, data: error.response.data})
-    }
-}
+    };
+};
 
 
 
@@ -98,5 +106,6 @@ module.exports = {
     clientesPost,
     clientesPut,
     clientesDelete,
+    newError,
     apiUrl,
 }

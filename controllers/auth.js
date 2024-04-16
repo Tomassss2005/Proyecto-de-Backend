@@ -106,12 +106,6 @@ const SignIn = async (req, res) => {
         });
     }
 
-    const error = (req, res, next) => {
-        // Simulamos un error
-        const err = new Error('Algo salió mal');
-        next(err);
-      };
-
 
 };
 

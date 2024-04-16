@@ -1,11 +1,9 @@
+const express = require('express');
+const app = express();
 
-const error = (err, req, res, next) => {
+const error = ((error, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something broke!');
-
-
-app.use(error);
-
-}
+});
 
 module.exports = error;
